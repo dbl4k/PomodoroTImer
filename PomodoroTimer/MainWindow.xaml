@@ -17,6 +17,9 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
+
+        <Image x:Name="btnReset" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_reset.png" MouseDown="btnReset_MouseDown" Margin="226,66,85,205"/>
+
         <Grid Margin="99,182,99,82">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

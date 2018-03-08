@@ -130,6 +130,10 @@ namespace PomodoroTimer
         {
             paused = true;
         }
-        
+
+        private void btnReset_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }
