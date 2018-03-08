@@ -46,22 +46,23 @@ namespace PomodoroTimer
 
         private void txtTimeRemaining_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (timerIsRunning())
+            if (!paused && !timerHasExpired())
             {
                 pauseTimer();
             }
-            else if (timerHasExpired()) {
-                setTimer(TimeSpan.FromMinutes(25));
+            else if (paused && !timerHasExpired())
+            {
+                resumeTimer();
             }
             else
             {
-                resumeTimer();
+                setTimer(TimeSpan.FromMinutes(25));
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (timerIsRunning()) {
+            if (!paused && !timerHasExpired()) {
                 timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
 
                 Action action = () => updateControl();
@@ -97,7 +98,7 @@ namespace PomodoroTimer
 
         private bool timerHasExpired()
         {
-            return timeRemaining.Milliseconds <= 0;
+            return timeRemaining.TotalMilliseconds <= 0;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
