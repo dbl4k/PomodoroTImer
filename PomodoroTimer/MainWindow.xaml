@@ -10,7 +10,7 @@
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
     </Window.Background>
-    <Grid>
+    <Grid MouseDown="Window_MouseDown">
         <Image x:Name="imgTomato" Margin="10" Source="pack://application:,,,/Resources/images/tomato.png"/>
         <Label x:Name="txtTimeRemaining" Content="00:00" FontSize="48" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" MouseDown="txtTimeRemaining_MouseDown">
             <Label.Effect>
