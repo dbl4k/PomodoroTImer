@@ -23,9 +23,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="btnPlay" Grid.Column="0" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_play.png"/>
-            <Image x:Name="btnPause" Grid.Column="1" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_pause.png"/>
-            <Image x:Name="btnRefresh" Grid.Column="2" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_refresh.png"/>
+            <Image x:Name="btnPlay" Grid.Column="0" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_play.png" MouseDown="btnPlay_MouseDown"/>
+            <Image x:Name="btnPause" Grid.Column="1" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_pause.png" MouseDown="btnPause_MouseDown"/>
+            <Image x:Name="btnRefresh" Grid.Column="2" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_refresh.png" MouseDown="btnRefresh_MouseDown"/>
         </Grid>
 
     </Grid>

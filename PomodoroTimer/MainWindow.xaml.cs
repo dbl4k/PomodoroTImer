@@ -26,6 +26,8 @@ namespace PomodoroTimer
         private TimeSpan timeRemaining;
         private bool paused;
 
+        private TimeSpan TIMER_25_MINS = TimeSpan.FromMinutes(25);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace PomodoroTimer
                 Interval = TimeSpan.FromSeconds(1).TotalMilliseconds
             };
 
-            setTimer(TimeSpan.FromMinutes(25));
+            setTimer(TIMER_25_MINS);
 
             timer.Elapsed += timer_Tick;
 
@@ -56,7 +58,7 @@ namespace PomodoroTimer
             }
             else
             {
-                setTimer(TimeSpan.FromMinutes(25));
+                setTimer(TIMER_25_MINS);
             }
         }
 
@@ -75,10 +77,13 @@ namespace PomodoroTimer
             txtTimeRemaining.Content = timeRemaining.Minutes.ToString("00") + ":" + timeRemaining.Seconds.ToString("00");
         }
 
-        private void setTimer(TimeSpan time)
+        private void setTimer(TimeSpan time, bool resume = true)
         {
             timeRemaining = time;
-            resumeTimer();
+
+            if (resume) {
+                resumeTimer();
+            }
         }
 
         private void resumeTimer()
@@ -106,5 +111,25 @@ namespace PomodoroTimer
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        private void btnPlay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (timerHasExpired()) {
+                setTimer(TIMER_25_MINS, resume: true);
+            }
+
+            resumeTimer();
+        }
+
+        private void btnRefresh_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            setTimer(TIMER_25_MINS, resume: false);
+        }
+
+        private void btnPause_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            paused = true;
+        }
+        
     }
 }
