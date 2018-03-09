@@ -46,22 +46,6 @@ namespace PomodoroTimer
 
         }
 
-        private void txtTimeRemaining_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!paused && !timerHasExpired())
-            {
-                pauseTimer();
-            }
-            else if (paused && !timerHasExpired())
-            {
-                resumeTimer();
-            }
-            else
-            {
-                setTimer(TIMER_25_MINS);
-            }
-        }
-
         private void timer_Tick(object sender, EventArgs e)
         {
             if (!paused && !timerHasExpired()) {
