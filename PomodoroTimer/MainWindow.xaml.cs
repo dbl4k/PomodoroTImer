@@ -22,102 +22,66 @@ namespace PomodoroTimer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Timer timer;
-        private TimeSpan timeRemaining;
-        private bool paused;
-
-        private TimeSpan TIMER_25_MINS = TimeSpan.FromMinutes(25);
+        private readonly ManagedTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            timeRemaining = TimeSpan.FromSeconds(0);
-
-            timer = new Timer()
-            {
-                Enabled = true,
-                Interval = TimeSpan.FromSeconds(1).TotalMilliseconds
-            };
-
-            setTimer(TIMER_25_MINS);
-
-            timer.Elapsed += timer_Tick;
+            timer = new ManagedTimer(
+                (TimeSpan value) => SetContent(value)
+            );
 
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        public void SetContent(TimeSpan value)
         {
-            if (!paused && !timerHasExpired()) {
-                timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
+            Action action = () => 
+                txtTimeRemaining.Content =
+                   value.Minutes.ToString("00")
+                   + ":"
+                   + value.Seconds.ToString("00");
 
-                Action action = () => updateControl();
-                Dispatcher.Invoke(action);
-
-            }
+            Dispatcher.Invoke(action);
+            
         }
         
-        public void updateControl() {
-            txtTimeRemaining.Content = timeRemaining.Minutes.ToString("00") + ":" + timeRemaining.Seconds.ToString("00");
-        }
-
-        private void setTimer(TimeSpan time, bool resume = true)
-        {
-            timeRemaining = time;
-
-            if (resume) {
-                resumeTimer();
-            }
-        }
-
-        private void resumeTimer()
-        {
-            paused = false;
-        }
-
-        private void pauseTimer()
-        {
-            paused = true;
-        }
-
-        private bool timerIsRunning()
-        {
-            return !timerHasExpired() || !paused;
-        }
-
-        private bool timerHasExpired()
-        {
-            return timeRemaining.TotalMilliseconds <= 0;
-        }
-
+        // draggable window support
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
+        #region "button events"
+        
+
         private void btnPlay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (timerHasExpired()) {
-                setTimer(TIMER_25_MINS, resume: true);
+            if (timer.IsZero) {
+                timer.Reset();
             }
 
-            resumeTimer();
+            timer.Resume();
         }
 
         private void btnRefresh_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            setTimer(TIMER_25_MINS, resume: false);
+            timer.Reset();
+            SetContent(timer.TimeRemaining);
         }
 
         private void btnPause_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            paused = true;
+            timer.Pause();
         }
 
         private void btnReset_MouseDown(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        #endregion
+
     }
 }
