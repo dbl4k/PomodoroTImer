@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using PomodoroTimer.Properties;
+using Application = System.Windows.Application;
 
 namespace PomodoroTimer
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -32,40 +22,39 @@ namespace PomodoroTimer
             RestoreConfiguredWindowPosition();
 
             timer = new ManagedTimer(
-                (TimeSpan value) => SetContent(value)
+                value => SetContent(value)
             );
-
         }
-        
+
 
         public void SetContent(TimeSpan value)
         {
-            Action action = () => 
+            Action action = () =>
                 txtTimeRemaining.Content =
-                   value.Minutes.ToString("00")
-                   + ":"
-                   + value.Seconds.ToString("00");
+                    value.Minutes.ToString("00")
+                    + ":"
+                    + value.Seconds.ToString("00");
 
             Dispatcher.Invoke(action);
-            
         }
- 
+
         #region "confguration getters/setters"
 
         private void RestoreConfiguredWindowPosition()
         {
-            if (ConfiguredWindowPositionIsValid()) {
-                this.Top = Properties.Settings.Default.MainWindow_Top;
-                this.Left = Properties.Settings.Default.MainWindow_Left;
+            if (ConfiguredWindowPositionIsValid())
+            {
+                Top = Settings.Default.MainWindow_Top;
+                Left = Settings.Default.MainWindow_Left;
             }
         }
 
         private bool ConfiguredWindowPositionIsValid()
         {
-            var top = Properties.Settings.Default.MainWindow_Top;
-            var left = Properties.Settings.Default.MainWindow_Left;
-            var width = this.Width;
-            var height = this.Height;
+            var top = Settings.Default.MainWindow_Top;
+            var left = Settings.Default.MainWindow_Left;
+            var width = Width;
+            var height = Height;
             var right = left + width;
             var bottom = top + height;
 
@@ -73,15 +62,15 @@ namespace PomodoroTimer
             var screenWidth = bounds.Width;
             var screenHeight = bounds.Height;
 
-            return (right < screenWidth && bottom < screenHeight);
+            return right < screenWidth && bottom < screenHeight;
         }
 
         private void SaveConfiguredWindowPosition()
         {
-            Properties.Settings.Default.MainWindow_Top = this.Top;
-            Properties.Settings.Default.MainWindow_Left = this.Left;
+            Settings.Default.MainWindow_Top = Top;
+            Settings.Default.MainWindow_Left = Left;
 
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         #endregion
@@ -92,14 +81,12 @@ namespace PomodoroTimer
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+                DragMove();
         }
 
         private void btnPlay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (timer.IsZero) {
-                timer.Reset();
-            }
+            if (timer.IsZero) timer.Reset();
 
             timer.Resume();
         }
@@ -117,15 +104,14 @@ namespace PomodoroTimer
 
         private void btnReset_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             SaveConfiguredWindowPosition();
         }
 
         #endregion
-        
     }
 }
