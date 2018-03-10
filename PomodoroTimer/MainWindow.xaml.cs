@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -56,24 +57,29 @@ namespace PomodoroTimer
             if (ConfiguredWindowPositionIsValid()) {
                 this.Top = Properties.Settings.Default.MainWindow_Top;
                 this.Left = Properties.Settings.Default.MainWindow_Left;
-                //this.Height = Properties.Settings.Default.MainWindow_Height;
-                //this.Width = Properties.Settings.Default.MainWindow_Width;
             }
         }
 
         private bool ConfiguredWindowPositionIsValid()
         {
-            return !(Properties.Settings.Default.MainWindow_Width == 0f ||
-               Properties.Settings.Default.MainWindow_Height == 0f);
+            var top = Properties.Settings.Default.MainWindow_Top;
+            var left = Properties.Settings.Default.MainWindow_Left;
+            var width = this.Width;
+            var height = this.Height;
+            var right = left + width;
+            var bottom = top + height;
 
+            var bounds = Screen.PrimaryScreen.Bounds;
+            var screenWidth = bounds.Width;
+            var screenHeight = bounds.Height;
+
+            return (right < screenWidth && bottom < screenHeight);
         }
 
         private void SaveConfiguredWindowPosition()
         {
             Properties.Settings.Default.MainWindow_Top = this.Top;
             Properties.Settings.Default.MainWindow_Left = this.Left;
-            //Properties.Settings.Default.MainWindow_Height = this.Height;
-            //Properties.Settings.Default.MainWindow_Width = this.Width;
 
             Properties.Settings.Default.Save();
         }
