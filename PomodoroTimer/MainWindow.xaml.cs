@@ -28,11 +28,14 @@ namespace PomodoroTimer
         {
             InitializeComponent();
 
+            RestoreConfiguredWindowPosition();
+
             timer = new ManagedTimer(
                 (TimeSpan value) => SetContent(value)
             );
 
         }
+        
 
         public void SetContent(TimeSpan value)
         {
@@ -45,16 +48,46 @@ namespace PomodoroTimer
             Dispatcher.Invoke(action);
             
         }
-        
+ 
+        #region "confguration getters/setters"
+
+        private void RestoreConfiguredWindowPosition()
+        {
+            if (ConfiguredWindowPositionIsValid()) {
+                this.Top = Properties.Settings.Default.MainWindow_Top;
+                this.Left = Properties.Settings.Default.MainWindow_Left;
+                //this.Height = Properties.Settings.Default.MainWindow_Height;
+                //this.Width = Properties.Settings.Default.MainWindow_Width;
+            }
+        }
+
+        private bool ConfiguredWindowPositionIsValid()
+        {
+            return !(Properties.Settings.Default.MainWindow_Width == 0f ||
+               Properties.Settings.Default.MainWindow_Height == 0f);
+
+        }
+
+        private void SaveConfiguredWindowPosition()
+        {
+            Properties.Settings.Default.MainWindow_Top = this.Top;
+            Properties.Settings.Default.MainWindow_Left = this.Left;
+            //Properties.Settings.Default.MainWindow_Height = this.Height;
+            //Properties.Settings.Default.MainWindow_Width = this.Width;
+
+            Properties.Settings.Default.Save();
+        }
+
+        #endregion
+
+        #region "ui events"
+
         // draggable window support
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-
-        #region "button events"
-        
 
         private void btnPlay_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -81,7 +114,12 @@ namespace PomodoroTimer
             System.Windows.Application.Current.Shutdown();
         }
 
-        #endregion
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveConfiguredWindowPosition();
+        }
 
+        #endregion
+        
     }
 }
