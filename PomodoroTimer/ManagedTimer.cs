@@ -77,7 +77,7 @@ namespace PomodoroTimer
             set
             {
                 _timeRemaining =
-                    _timeRemaining.TotalSeconds > 0 ? value : TimeSpan.FromSeconds(0);
+                    value.TotalSeconds > 0 ? value : TimeSpan.FromSeconds(0);
             }
 
         }
