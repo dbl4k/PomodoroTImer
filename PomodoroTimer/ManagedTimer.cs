@@ -12,7 +12,7 @@ namespace PomodoroTimer
 
         private OnTick _onTick;
 
-        private readonly TimeSpan TIMER_25_MINS = TimeSpan.FromMinutes(25);
+        private readonly TimeSpan ConiguredStartValue = Properties.Settings.Default.Timer_StartValue;
 
         private readonly Timer _timer;
         private bool _paused = true;
@@ -22,7 +22,7 @@ namespace PomodoroTimer
 
         public ManagedTimer(OnTick callback)
         {
-            _timeRemaining = TIMER_25_MINS;
+            _timeRemaining = ConiguredStartValue;
 
             _timer = new Timer()
             {
@@ -120,7 +120,7 @@ namespace PomodoroTimer
 
         public void Reset()
         {
-            TimeRemaining = TIMER_25_MINS;
+            TimeRemaining = ConiguredStartValue;
         }
 
         #endregion

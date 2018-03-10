@@ -14,5 +14,8 @@
     <Setting Name="MainWindow_Width" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="Timer_StartValue" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:25:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

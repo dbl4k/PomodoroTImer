@@ -70,5 +70,17 @@ namespace PomodoroTimer.Properties {
                 this["MainWindow_Width"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:25:00")]
+        public global::System.TimeSpan Timer_StartValue {
+            get {
+                return ((global::System.TimeSpan)(this["Timer_StartValue"]));
+            }
+            set {
+                this["Timer_StartValue"] = value;
+            }
+        }
     }
 }
