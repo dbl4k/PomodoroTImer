@@ -10,8 +10,8 @@ namespace PomodoroTimer
     {
         public delegate void OnTick(TimeSpan value);
 
-        private OnTick _onTick;
-
+        private readonly OnTick _onTick;
+    
         private readonly TimeSpan _configuredStartValue = Properties.Settings.Default.Timer_StartValue;
 
         private readonly Timer _timer;
