@@ -5,30 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PomodoroTimer"
         mc:Ignorable="d"
-        Title="Pomodoro Timer" Height="291.317" Width="331.137" Topmost="True"
-        AllowsTransparency="True" WindowStyle="None">
+        Title="Pomodoro Timer" Height="146.317" Width="164.137" Topmost="True"
+        AllowsTransparency="True" WindowStyle="None" Closing="Window_Closing">
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
     </Window.Background>
     <Grid MouseDown="Window_MouseDown">
-        <Image x:Name="imgTomato" Margin="10" Source="pack://application:,,,/Resources/images/tomato.png"/>
-        <Label x:Name="txtTimeRemaining" Content="00:00" FontSize="48" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Image x:Name="imgTomato" Margin="10,10,0,0" Source="pack://application:,,,/Resources/images/tomato.png"/>
+        <Label x:Name="txtTimeRemaining" Content="00:00" FontSize="36" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Height="53" Margin="34,49,24,44" Width="106">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
 
-        <Image x:Name="btnReset" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_reset.png" MouseDown="btnReset_MouseDown" Margin="226,66,85,205"/>
+        <Image x:Name="btnReset" Source="pack://application:,,,/Resources/images/ico_reset.png" MouseDown="btnReset_MouseDown" Margin="126,39,28,93"/>
 
-        <Grid Margin="99,182,99,82">
+        <Grid Margin="52,109,41,21">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="btnPlay" Grid.Column="0" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_play.png" MouseDown="btnPlay_MouseDown"/>
-            <Image x:Name="btnPause" Grid.Column="1" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_pause.png" MouseDown="btnPause_MouseDown"/>
-            <Image x:Name="btnRefresh" Grid.Column="2" Width="20" Height="20" Source="pack://application:,,,/Resources/images/ico_refresh.png" MouseDown="btnRefresh_MouseDown"/>
+            <Image x:Name="btnPlay" Grid.Column="0" Source="pack://application:,,,/Resources/images/ico_play.png" MouseDown="btnPlay_MouseDown" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Image x:Name="btnPause" Grid.Column="1" Source="pack://application:,,,/Resources/images/ico_pause.png" MouseDown="btnPause_MouseDown" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Image x:Name="btnRefresh" Grid.Column="2" Source="pack://application:,,,/Resources/images/ico_refresh.png" MouseDown="btnRefresh_MouseDown" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
     </Grid>
