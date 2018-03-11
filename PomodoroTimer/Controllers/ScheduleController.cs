@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PomodoroTimer.ViewModels;
 
 namespace PomodoroTimer.Controllers
 {
@@ -49,6 +50,11 @@ namespace PomodoroTimer.Controllers
         private string GetDefaultItemName(int i)
         {
             return String.Format(_fDefaultItemName, i);
+        }
+
+        public ScheduleItems GetObservableCollection()
+        {
+            return new ScheduleItems(this);
         }
 
         #endregion
