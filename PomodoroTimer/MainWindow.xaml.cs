@@ -29,6 +29,8 @@ namespace PomodoroTimer
             _timer = new ManagedTimer(
                 UpdateTimeRemainingLabel
             );
+
+            _timer.TimesUp += TimesUp;
         }
         
         public void UpdateTimeRemainingLabel(TimeSpan value)
@@ -38,6 +40,11 @@ namespace PomodoroTimer
                     $"{value.Minutes:00}:{value.Seconds:00}";
             
             Dispatcher.Invoke(Action);
+        }
+        
+        public void TimesUp(object timer, EventArgs e)
+        {
+            throw new Exception("Woot!");
         }
 
         #region "confguration getters/setters"

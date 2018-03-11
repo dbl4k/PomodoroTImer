@@ -57,7 +57,7 @@ namespace PomodoroTimer.Controllers
             return new ScheduleItems(this);
         }
 
-        public bool HasOpenScheduleItem() => !(GetNextOpenScheduleItem() == null);
+        public bool HasOpenScheduleItem() => GetNextOpenScheduleItem() != null;
 
         public ScheduleItem GetNextOpenScheduleItem()
         {

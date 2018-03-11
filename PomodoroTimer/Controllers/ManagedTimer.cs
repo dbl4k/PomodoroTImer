@@ -8,6 +8,9 @@ namespace PomodoroTimer.Controllers
 {
     public class ManagedTimer
     {
+        public event EventHandler TimesUp;
+        private bool _timesUpEventFired = false;
+
         public delegate void OnTick(TimeSpan value);
 
         private readonly OnTick _onTick;
@@ -15,7 +18,7 @@ namespace PomodoroTimer.Controllers
         private readonly TimeSpan _configuredStartValue = Properties.Settings.Default.Timer_StartValue;
 
         private readonly Timer _timer;
-        private bool _paused = true;
+        private bool _paused = false;
         private TimeSpan _timeRemaining;
 
         #region "constructor"
@@ -46,6 +49,17 @@ namespace PomodoroTimer.Controllers
                 Decrement();
                 _onTick(TimeRemaining);
             }
+
+            if (!IsPaused && IsZero)
+            {
+                if (!_timesUpEventFired)
+                {
+                    _timesUpEventFired = true;
+                    TimesUp?.Invoke(this, e);
+                }
+                
+            }
+
         }
 
         #endregion
@@ -122,6 +136,7 @@ namespace PomodoroTimer.Controllers
         {
             _timer.Stop();
             TimeRemaining = _configuredStartValue;
+            _timesUpEventFired = false;
             _timer.Start();
         }
 
