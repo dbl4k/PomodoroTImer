@@ -35,7 +35,7 @@ namespace PomodoroTimer
         {
             void action() =>
                 txtTimeRemaining.Content = 
-                    String.Format("{0:00}:{1:00}", value.Minutes, value.Seconds);
+                    $"{value.Minutes:00}:{value.Seconds:00}";
             
             Dispatcher.Invoke(action);
         }
