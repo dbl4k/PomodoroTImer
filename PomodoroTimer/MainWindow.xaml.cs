@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using PomodoroTimer.Controllers;
 using PomodoroTimer.Properties;
+using PomodoroTimer.ViewModels;
 using Application = System.Windows.Application;
 
 namespace PomodoroTimer
@@ -15,6 +16,8 @@ namespace PomodoroTimer
     public partial class MainWindow : Window
     {
         private readonly ManagedTimer timer;
+        private ScheduleItems scheduleItems;
+        private SchedulePlanner planner;
 
         public MainWindow()
         {
@@ -26,8 +29,7 @@ namespace PomodoroTimer
                 value => UpdateTimeRemainingLabel(value)
             );
         }
-
-
+        
         public void UpdateTimeRemainingLabel(TimeSpan value)
         {
             void action() =>
@@ -104,6 +106,22 @@ namespace PomodoroTimer
         private void btnReset_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void btnSchedulePlanner_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (scheduleItems == null)
+            {
+                scheduleItems = new ScheduleItems(3);
+            }
+
+            if (planner == null)
+            {
+                planner = new SchedulePlanner();
+                planner.lstScheduleItems.ItemsSource = scheduleItems;
+            }
+            
+            planner.Show();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

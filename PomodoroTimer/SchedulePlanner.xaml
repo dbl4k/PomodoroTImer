@@ -53,7 +53,8 @@
 
                         <!-- ScheduleItem.Completed (bool) -->
                         <TextBlock Text=" Completed: " />
-                        <CheckBox Checked="{Binding Path=Completed}"/>
+                        <CheckBox IsChecked="{Binding Path=Completed}">
+                        </CheckBox>
                     </StackPanel>
                 </DataTemplate>
                 

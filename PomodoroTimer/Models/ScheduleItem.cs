@@ -15,7 +15,7 @@ namespace PomodoroTimer.Models
         
         public String Label { get; set; }
         public TimeSpan TimeToSpend { get; set; }
-        public bool Completed { get; set; }
+        public bool Completed { get; set; } = false;
 
         #endregion
 

@@ -16,7 +16,7 @@ namespace PomodoroTimer.ViewModels
 
         public ScheduleItems(int items) : base()
         {
-            for (var i = 1; i <= 5; i++)
+            for (var i = 1; i <= items; i++)
             {
                 this.Add(new ScheduleItem(String.Format("Activity ", i)));
             }
