@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 
-namespace PomodoroTimer
+namespace PomodoroTimer.Controllers
 {
     public class ManagedTimer
     {

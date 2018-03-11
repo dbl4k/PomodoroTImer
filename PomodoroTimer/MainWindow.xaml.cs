@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using PomodoroTimer.Controllers;
 using PomodoroTimer.Properties;
 using Application = System.Windows.Application;
 
