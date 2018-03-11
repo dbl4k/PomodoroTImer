@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PomodoroTimer.Controllers;
 
 namespace PomodoroTimer
 {
@@ -20,11 +21,13 @@ namespace PomodoroTimer
     /// </summary>
     public partial class SchedulePlanner : Window
     {
+        private ScheduleController controller;
+
         #region "constructor(s)"
 
-        public SchedulePlanner(ScheduleItems items) : this()
+        public SchedulePlanner(ScheduleController controller) : this()
         {
-            lstScheduleItems.ItemsSource = items;
+            lstScheduleItems.ItemsSource = controller.GetObservableCollection();
         }
 
         public SchedulePlanner() 
@@ -48,6 +51,15 @@ namespace PomodoroTimer
             this.Hide();
         }
 
+        private void btnStartSchedule_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region "methods"
+        
         #endregion
 
     }

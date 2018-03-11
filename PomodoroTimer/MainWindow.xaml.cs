@@ -119,7 +119,7 @@ namespace PomodoroTimer
             if (_planner == null)
             {
                 _planner = 
-                    new SchedulePlanner(_scheduleController.GetObservableCollection());
+                    new SchedulePlanner(_scheduleController);
             }
             
             _planner.Show();
