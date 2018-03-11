@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PomodoroTimer.Controllers;
 using PomodoroTimer.Models;
 
 namespace PomodoroTimer.ViewModels
@@ -20,7 +21,12 @@ namespace PomodoroTimer.ViewModels
             {
                 this.Add(new ScheduleItem(String.Format("Activity ", i)));
             }
-   
+        }
+
+
+        public ScheduleItems(ScheduleController controller) : base()
+        {
+            controller.Schedule.Items.ForEach((item) => Add(item));
         }
     }
 }
