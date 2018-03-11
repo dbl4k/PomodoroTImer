@@ -73,6 +73,15 @@
             VerticalAlignment="Top" 
             Width="68"
             Click="btnClose_Click"/>
-    
-        </Grid>
+        <Button x:Name="btnStartSchedule"
+            Content="Start Schedule" 
+            Background="Red" 
+            Foreground="AliceBlue" 
+            HorizontalAlignment="Right" 
+            Margin="0,270,87.5,0" 
+            VerticalAlignment="Top" 
+            Width="100"
+            Click="btnStartSchedule_Click"/>
+
+    </Grid>
 </Window>
