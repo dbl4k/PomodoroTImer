@@ -22,19 +22,17 @@ namespace PomodoroTimer
             RestoreConfiguredWindowPosition();
 
             timer = new ManagedTimer(
-                value => SetContent(value)
+                value => UpdateTimeRemainingLabel(value)
             );
         }
 
 
-        public void SetContent(TimeSpan value)
+        public void UpdateTimeRemainingLabel(TimeSpan value)
         {
-            Action action = () =>
-                txtTimeRemaining.Content =
-                    value.Minutes.ToString("00")
-                    + ":"
-                    + value.Seconds.ToString("00");
-
+            void action() =>
+                txtTimeRemaining.Content = 
+                    String.Format("{0:00}:{1:00}", value.Minutes, value.Seconds);
+            
             Dispatcher.Invoke(action);
         }
 
@@ -94,7 +92,7 @@ namespace PomodoroTimer
         private void btnRefresh_MouseDown(object sender, MouseButtonEventArgs e)
         {
             timer.Reset();
-            SetContent(timer.TimeRemaining);
+            UpdateTimeRemainingLabel(timer.TimeRemaining);
         }
 
         private void btnPause_MouseDown(object sender, MouseButtonEventArgs e)
