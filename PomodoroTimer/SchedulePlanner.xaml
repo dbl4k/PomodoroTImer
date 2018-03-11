@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PomodoroTimer"
         mc:Ignorable="d"
-        Title="SchedulePlanner" Height="300" Width="300"
+        Title="SchedulePlanner" Height="300" Width="396.639"
         Topmost="True" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown">
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
