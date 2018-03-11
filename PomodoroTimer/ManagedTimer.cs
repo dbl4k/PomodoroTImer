@@ -120,7 +120,9 @@ namespace PomodoroTimer
 
         public void Reset()
         {
+            _timer.Stop();
             TimeRemaining = _configuredStartValue;
+            _timer.Start();
         }
 
         #endregion
