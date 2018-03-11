@@ -113,7 +113,7 @@ namespace PomodoroTimer
         {
             if (_scheduleController == null)
             {
-                _scheduleController = new ScheduleController(9);
+                _scheduleController = new ScheduleController(3);
             }
 
             if (_planner == null)
