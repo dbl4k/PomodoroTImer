@@ -14,7 +14,7 @@ namespace PomodoroTimer.Controllers
 
         #region "fields"
 
-        public Schedule _schedule;
+        public Schedule Schedule;
         
         #endregion
 
@@ -32,13 +32,13 @@ namespace PomodoroTimer.Controllers
 
         public ScheduleController(int items)
         {
-            _schedule = new Schedule();
-            _schedule.Items = new List<ScheduleItem>();
+            Schedule = new Schedule();
+            Schedule.Items = new List<ScheduleItem>();
 
             for(var i=1; i <= items; i++)
             {
                 var name = GetDefaultItemName(i);
-                _schedule.Items.Add(new ScheduleItem(name));
+                Schedule.Items.Add(new ScheduleItem(name));
             }
         }
         
