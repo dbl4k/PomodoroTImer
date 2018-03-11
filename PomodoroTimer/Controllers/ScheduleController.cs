@@ -21,7 +21,7 @@ namespace PomodoroTimer.Controllers
 
         #region "properties"
 
-        // none yet..
+        public ScheduleItem CurrentScheduleItem { get; set; }
 
         #endregion
 
@@ -55,6 +55,24 @@ namespace PomodoroTimer.Controllers
         public ScheduleItems GetObservableCollection()
         {
             return new ScheduleItems(this);
+        }
+
+        public bool HasOpenScheduleItem() => !(GetNextOpenScheduleItem() == null);
+
+        public ScheduleItem GetNextOpenScheduleItem()
+        {
+            ScheduleItem result = null;
+
+            foreach (ScheduleItem item in Schedule.Items)
+            {
+                if (item.Completed.Equals(false))
+                {
+                    result = item;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         #endregion
