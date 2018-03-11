@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PomodoroTimer.Controllers
 {
-    class ScheduleController
+    public class ScheduleController
     {
 
         private static String F_DEFAULT_ITEM_NAME = "Item {0}";
