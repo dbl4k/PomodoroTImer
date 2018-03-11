@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PomodoroTimer.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,20 @@ namespace PomodoroTimer
     /// </summary>
     public partial class SchedulePlanner : Window
     {
-        public SchedulePlanner()
+        #region "constructor(s)"
+
+        public SchedulePlanner(ScheduleItems items) : this()
+        {
+            lstScheduleItems.ItemsSource = items;
+        }
+
+        public SchedulePlanner() 
         {
             InitializeComponent();
         }
-        
+
+        #endregion
+
         #region "ui events"
 
         // draggable window support

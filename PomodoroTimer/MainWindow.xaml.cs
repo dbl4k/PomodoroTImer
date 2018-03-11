@@ -119,8 +119,7 @@ namespace PomodoroTimer
             if (planner == null)
             {
                 var observable = new ScheduleItems(scheduleController);
-                planner = new SchedulePlanner();
-                planner.lstScheduleItems.ItemsSource = observable;
+                planner = new SchedulePlanner(observable);
             }
             
             planner.Show();
