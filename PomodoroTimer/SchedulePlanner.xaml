@@ -10,7 +10,7 @@
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
     </Window.Background>
-    
+
     <Grid>
         <Rectangle x:Name="rectBackground" 
                    Fill="#FFD33A3A" 
@@ -20,5 +20,11 @@
                    VerticalAlignment="Stretch"  
                    RadiusY="15" 
                    RadiusX="15"/>
+        <ListBox x:Name="lstScheduleItems" 
+                 Background="#FFD33A3A"
+                 Margin="10,45,10,25" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch" 
+                 Width="280" />
     </Grid>
 </Window>
