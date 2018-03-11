@@ -22,45 +22,57 @@
         </ObjectDataProvider>
         <vm:ScheduleItems x:Key="ScheduleItemsData"/>
     </Window.Resources>
-    
-    
+
+
 
     <Grid>
         <Rectangle x:Name="rectBackground" 
-                   Fill="#FFD33A3A" 
+                   Fill="#FF0000" 
                    Stroke="Black" 
                    Margin="0,0,0,0" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch"  
                    RadiusY="15" 
                    RadiusX="15"/>
-        <ListBox x:Name="lstScheduleItems" 
-                 Background="#FFD33A3A"
-                 Margin="10,45,10,25" 
+        <ListBox x:Name="lstScheduleItems"
+                 BorderThickness="0"
+                 Background="#FF0000"
+                 Margin="10,45,10.5,36" 
                  HorizontalAlignment="Stretch" 
                  VerticalAlignment="Stretch"
                  ItemsSource="{Binding Source={StaticResource ScheduleItemsDataSource}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                         <!-- ScheduleItem.Label (String) -->
-                        <TextBlock Text="Activity: " />
-                        <TextBox Text="{Binding Path=Label}" />
+                        <TextBlock Text="Activity: " Foreground="WhiteSmoke" />
+                        <TextBox Text="{Binding Path=Label}" Width="130" />
 
                         <!-- ScheduleItem.TimeToSpend (TimeSpan) -->
-                        <TextBlock Text=" Time: " />
-                        <TextBox Text="{Binding Path=TimeToSpend}"/>
+                        <TextBlock Text=" Time: " Foreground="WhiteSmoke" />
+                        <TextBox Text="{Binding Path=TimeToSpend}" Width="50"/>
 
                         <!-- ScheduleItem.Completed (bool) -->
-                        <TextBlock Text=" Completed: " />
+                        <TextBlock Text=" Completed: " Foreground="WhiteSmoke" />
                         <CheckBox IsChecked="{Binding Path=Completed}">
                         </CheckBox>
                     </StackPanel>
                 </DataTemplate>
-                
+
 
             </ListBox.ItemTemplate>
 
         </ListBox>
-    </Grid>
+
+        <Button x:Name="btnClose"
+            Content="Close" 
+            Background="Red" 
+            Foreground="AliceBlue" 
+            HorizontalAlignment="Right" 
+            Margin="0,270,14.5,0" 
+            VerticalAlignment="Top" 
+            Width="68"
+            Click="btnClose_Click"/>
+    
+        </Grid>
 </Window>

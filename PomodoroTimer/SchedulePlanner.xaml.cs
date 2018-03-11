@@ -43,7 +43,12 @@ namespace PomodoroTimer
                 DragMove();
         }
 
-        #endregion
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
 
+        #endregion
+        
     }
 }
