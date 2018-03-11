@@ -10,7 +10,7 @@ namespace PomodoroTimer.Controllers
     public class ScheduleController
     {
 
-        private static String F_DEFAULT_ITEM_NAME = "Item {0}";
+        private static String _fDefaultItemName = "Item {0}";
 
         #region "fields"
 
@@ -48,7 +48,7 @@ namespace PomodoroTimer.Controllers
 
         private string GetDefaultItemName(int i)
         {
-            return String.Format(F_DEFAULT_ITEM_NAME, i);
+            return String.Format(_fDefaultItemName, i);
         }
 
         #endregion

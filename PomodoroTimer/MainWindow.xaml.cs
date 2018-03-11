@@ -16,9 +16,9 @@ namespace PomodoroTimer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ManagedTimer timer;
-        private ScheduleController scheduleController;
-        private SchedulePlanner planner;
+        private readonly ManagedTimer _timer;
+        private ScheduleController _scheduleController;
+        private SchedulePlanner _planner;
 
         public MainWindow()
         {
@@ -26,18 +26,18 @@ namespace PomodoroTimer
 
             RestoreConfiguredWindowPosition();
 
-            timer = new ManagedTimer(
+            _timer = new ManagedTimer(
                 UpdateTimeRemainingLabel
             );
         }
         
         public void UpdateTimeRemainingLabel(TimeSpan value)
         {
-            void action() =>
+            void Action() =>
                 txtTimeRemaining.Content = 
                     $"{value.Minutes:00}:{value.Seconds:00}";
             
-            Dispatcher.Invoke(action);
+            Dispatcher.Invoke(Action);
         }
 
         #region "confguration getters/setters"
@@ -88,20 +88,20 @@ namespace PomodoroTimer
 
         private void btnPlay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (timer.IsZero) timer.Reset();
+            if (_timer.IsZero) _timer.Reset();
 
-            timer.Resume();
+            _timer.Resume();
         }
 
         private void btnRefresh_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            timer.Reset();
-            UpdateTimeRemainingLabel(timer.TimeRemaining);
+            _timer.Reset();
+            UpdateTimeRemainingLabel(_timer.TimeRemaining);
         }
 
         private void btnPause_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            timer.Pause();
+            _timer.Pause();
         }
 
         private void btnReset_MouseDown(object sender, MouseButtonEventArgs e)
@@ -111,18 +111,18 @@ namespace PomodoroTimer
 
         private void btnSchedulePlanner_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (scheduleController == null)
+            if (_scheduleController == null)
             {
-                scheduleController = new ScheduleController(9);
+                _scheduleController = new ScheduleController(9);
             }
 
-            if (planner == null)
+            if (_planner == null)
             {
-                var observable = new ScheduleItems(scheduleController);
-                planner = new SchedulePlanner(observable);
+                var observable = new ScheduleItems(_scheduleController);
+                _planner = new SchedulePlanner(observable);
             }
             
-            planner.Show();
+            _planner.Show();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

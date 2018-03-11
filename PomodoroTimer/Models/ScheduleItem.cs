@@ -9,7 +9,7 @@ namespace PomodoroTimer.Models
 {
     public class ScheduleItem
     {
-        private static readonly TimeSpan DEFAULT_TIME_TO_SPEND = TimeSpan.FromMinutes(25);
+        private static readonly TimeSpan DefaultTimeToSpend = TimeSpan.FromMinutes(25);
 
         #region "properties"
         
@@ -25,7 +25,7 @@ namespace PomodoroTimer.Models
         {
         }
 
-        public ScheduleItem(String label) : this(label, DEFAULT_TIME_TO_SPEND)
+        public ScheduleItem(String label) : this(label, DefaultTimeToSpend)
         {
         }
         
