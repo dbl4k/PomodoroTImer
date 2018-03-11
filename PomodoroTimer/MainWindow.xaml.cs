@@ -27,7 +27,7 @@ namespace PomodoroTimer
             RestoreConfiguredWindowPosition();
 
             timer = new ManagedTimer(
-                value => UpdateTimeRemainingLabel(value)
+                UpdateTimeRemainingLabel
             );
         }
         
