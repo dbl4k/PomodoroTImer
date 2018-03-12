@@ -57,6 +57,7 @@ namespace PomodoroTimer
             if (_controller.HasOpenScheduleItem())
             {
                 _controller.CurrentScheduleItem = _controller.GetNextOpenScheduleItem();
+                _controller.Timer.Reset(_controller.CurrentScheduleItem.TimeToSpend);
             }
 
         }
