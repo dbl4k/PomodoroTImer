@@ -22,7 +22,7 @@
         <Image x:Name="btnSchedulePlanner" Source="Resources/images/ico_settings.png" MouseDown="btnSchedulePlanner_MouseDown" Margin="140,76,11,56"/>
         <Image x:Name="btnReset" Source="pack://application:,,,/Resources/images/ico_reset.png" MouseDown="btnReset_MouseDown" Margin="126,39,28,93"/>
 
-        <Grid Margin="52,114,41,16.5">
+        <Grid Margin="52,109,41,21.5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -41,7 +41,7 @@
                    HorizontalAlignment="Left" 
                    Margin="34,93,0,0" 
                    TextWrapping="Wrap" 
-                   Text="TextBlock" 
+                   Text="" 
                    VerticalAlignment="Top" 
                    Width="106">
             <TextBlock.Effect>

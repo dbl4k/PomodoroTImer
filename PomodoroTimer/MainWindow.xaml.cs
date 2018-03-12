@@ -40,6 +40,15 @@ namespace PomodoroTimer
                     $"{value.Minutes:00}:{value.Seconds:00}";
             
             Dispatcher.Invoke(Action);
+
+            if (_scheduleController != null && _scheduleController.CurrentScheduleItem != null)
+            {
+                void Action2() =>
+                    txtCurrentScheduleItemLabel.Text =
+                        _scheduleController.CurrentScheduleItem.Label;
+
+                Dispatcher.Invoke(Action2);
+            }
         }
         
         public void TimesUp(object timer, EventArgs e)
@@ -47,14 +56,20 @@ namespace PomodoroTimer
             if (_scheduleController.CurrentScheduleItem != null && 
                 _scheduleController.HasOpenScheduleItem())
             {
+                _scheduleController.CurrentScheduleItem.Completed = true;
                 _scheduleController.CurrentScheduleItem = _scheduleController.GetNextOpenScheduleItem();
-                _timer.Reset(_scheduleController.CurrentScheduleItem.TimeToSpend);
 
-                void Action() =>
-                    txtCurrentScheduleItemLabel.Text =
-                        _scheduleController.CurrentScheduleItem.Label;
+                // next item, if here is one.
+                if(_scheduleController.CurrentScheduleItem != null)
+                {
+                    _timer.Reset(_scheduleController.CurrentScheduleItem.TimeToSpend);
 
-                Dispatcher.Invoke(Action);
+                    void Action() =>
+                        txtCurrentScheduleItemLabel.Text =
+                            _scheduleController.CurrentScheduleItem.Label;
+
+                    Dispatcher.Invoke(Action);
+                }
             }
         }
 
