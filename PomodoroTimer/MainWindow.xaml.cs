@@ -44,7 +44,12 @@ namespace PomodoroTimer
         
         public void TimesUp(object timer, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Times Up!");
+            if (_scheduleController.CurrentScheduleItem != null && 
+                _scheduleController.HasOpenScheduleItem())
+            {
+                _scheduleController.CurrentScheduleItem = _scheduleController.GetNextOpenScheduleItem();
+                _timer.Reset(_scheduleController.CurrentScheduleItem.TimeToSpend);
+            }
         }
 
         #region "confguration getters/setters"

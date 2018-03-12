@@ -134,8 +134,13 @@ namespace PomodoroTimer.Controllers
 
         public void Reset()
         {
+            Reset(_configuredStartValue);
+        }
+
+        public void Reset(TimeSpan value)
+        {
             _timer.Stop();
-            TimeRemaining = _configuredStartValue;
+            TimeRemaining = value;
             _timesUpEventFired = false;
             _timer.Start();
         }
