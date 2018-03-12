@@ -44,7 +44,7 @@ namespace PomodoroTimer
         
         public void TimesUp(object timer, EventArgs e)
         {
-            throw new Exception("Woot!");
+            System.Windows.Forms.MessageBox.Show("Times Up!");
         }
 
         #region "confguration getters/setters"
