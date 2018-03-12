@@ -49,6 +49,12 @@ namespace PomodoroTimer
             {
                 _scheduleController.CurrentScheduleItem = _scheduleController.GetNextOpenScheduleItem();
                 _timer.Reset(_scheduleController.CurrentScheduleItem.TimeToSpend);
+
+                void Action() =>
+                    txtCurrentScheduleItemLabel.Text =
+                        _scheduleController.CurrentScheduleItem.Label;
+
+                Dispatcher.Invoke(Action);
             }
         }
 
