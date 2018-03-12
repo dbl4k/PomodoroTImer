@@ -21,16 +21,17 @@ namespace PomodoroTimer
     /// </summary>
     public partial class SchedulePlanner : Window
     {
-        private ScheduleController controller;
+        private readonly ScheduleController _controller;
 
         #region "constructor(s)"
 
         public SchedulePlanner(ScheduleController controller) : this()
         {
-            lstScheduleItems.ItemsSource = controller.GetObservableCollection();
+            _controller = controller;
+            lstScheduleItems.ItemsSource = _controller.GetObservableCollection();
         }
 
-        public SchedulePlanner() 
+        public SchedulePlanner()
         {
             InitializeComponent();
         }
