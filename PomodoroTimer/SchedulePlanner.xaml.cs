@@ -54,6 +54,10 @@ namespace PomodoroTimer
 
         private void btnStartSchedule_Click(object sender, RoutedEventArgs e)
         {
+            if (_controller.HasOpenScheduleItem())
+            {
+                _controller.CurrentScheduleItem = _controller.GetNextOpenScheduleItem();
+            }
 
         }
 
