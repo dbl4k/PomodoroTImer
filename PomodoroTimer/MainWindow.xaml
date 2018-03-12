@@ -13,7 +13,7 @@
 
     <Grid MouseDown="Window_MouseDown">
         <Image x:Name="imgTomato" Margin="10,10,0,0" Source="pack://application:,,,/Resources/images/tomato.png"/>
-        <Label x:Name="txtTimeRemaining" Content="00:00" FontSize="36" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Height="53" Margin="34,49,24,44" Width="106">
+        <Label x:Name="txtTimeRemaining" Content="00:00" FontSize="36" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Height="53" Margin="34,40,24,53.5" Width="106">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
@@ -22,7 +22,7 @@
         <Image x:Name="btnSchedulePlanner" Source="Resources/images/ico_settings.png" MouseDown="btnSchedulePlanner_MouseDown" Margin="140,76,11,56"/>
         <Image x:Name="btnReset" Source="pack://application:,,,/Resources/images/ico_reset.png" MouseDown="btnReset_MouseDown" Margin="126,39,28,93"/>
 
-        <Grid Margin="52,109,41,21">
+        <Grid Margin="52,114,41,16.5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -32,6 +32,22 @@
             <Image x:Name="btnPause" Grid.Column="1" Source="pack://application:,,,/Resources/images/ico_pause.png" MouseDown="btnPause_MouseDown" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Image x:Name="btnRefresh" Grid.Column="2" Source="pack://application:,,,/Resources/images/ico_refresh.png" MouseDown="btnRefresh_MouseDown" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
+        
+        <TextBlock x:Name="txtCurrentScheduleItemLabel" 
+                   Foreground="WhiteSmoke"
+                   TextAlignment="Center"
+                   FontFamily="Verdana"
+                   FontSize="9px"
+                   HorizontalAlignment="Left" 
+                   Margin="34,93,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="TextBlock" 
+                   VerticalAlignment="Top" 
+                   Width="106">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+            </TextBlock.Effect>
+        </TextBlock>
 
     </Grid>
 </Window>
