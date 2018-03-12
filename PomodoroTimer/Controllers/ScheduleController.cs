@@ -16,6 +16,7 @@ namespace PomodoroTimer.Controllers
         #region "fields"
 
         public Schedule Schedule;
+        public ManagedTimer Timer;
         
         #endregion
 
@@ -27,12 +28,14 @@ namespace PomodoroTimer.Controllers
 
         #region "constructor(s)"
 
-        public ScheduleController() : this(1) 
+        public ScheduleController(ManagedTimer timer) : this(timer, 1) 
         {
         }
 
-        public ScheduleController(int items)
+        public ScheduleController(ManagedTimer timer, int items)
         {
+            Timer = timer;
+
             Schedule = new Schedule();
             Schedule.Items = new List<ScheduleItem>();
 
