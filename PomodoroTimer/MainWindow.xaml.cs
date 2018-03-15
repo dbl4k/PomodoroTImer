@@ -40,35 +40,26 @@ namespace PomodoroTimer
             bool hasCurrentScheduleItem =
                 (_scheduleController != null && _scheduleController.CurrentScheduleItem != null);
 
+            var timeLabelText = $"{value.Minutes:00}:{value.Seconds:00}";
+            var scheduleItemText = hasCurrentScheduleItem ? _scheduleController.CurrentScheduleItem.Label : String.Empty;
+
             List<Action> actions = new List<Action>();
 
-            actions.Add(() =>
-                txtTimeRemaining.Content = 
-                    $"{value.Minutes:00}:{value.Seconds:00}"
-            );
-
-            actions.Add(() =>
-                txtCurrentScheduleItemLabel.Text =
-                    hasCurrentScheduleItem ?
-                        _scheduleController.CurrentScheduleItem.Label
-                        : String.Empty
-            );
+            actions.Add(() => txtTimeRemaining.Content = timeLabelText);
+            actions.Add(() => txtCurrentScheduleItemLabel.Text = scheduleItemText);
             
             actions.ForEach((n) => Dispatcher.Invoke(n));
         }
         
         public void TimesUp(object timer, EventArgs e)
         {
+            _scheduleController.CompleteCurrentScheduleItem();
+
             if (_scheduleController.HasOpenScheduleItem())
-            {
-                _scheduleController.CompleteCurrentScheduleItem();
                 _scheduleController.InitializeNextOpenScheduleItem();
-            }
             else
-            {
-                // All schedule Items finished.
                 _scheduleController.ClearCurrentScheduleItem();
-            }
+            
         }
 
         #region "confguration getters/setters"

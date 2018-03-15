@@ -48,9 +48,8 @@ namespace PomodoroTimer.Controllers
             if (IsRunning)
             {
                 Decrement();
-                _onTick(TimeRemaining);
             }
-
+           
             if (!IsPaused && IsZero)
             {
                 if (!_timesUpEventFired)
@@ -61,6 +60,7 @@ namespace PomodoroTimer.Controllers
                 
             }
 
+            _onTick(TimeRemaining);
         }
 
         #endregion
