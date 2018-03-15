@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
@@ -36,41 +37,37 @@ namespace PomodoroTimer
         
         public void UpdateTimeRemainingLabel(TimeSpan value)
         {
-            void Action() =>
+            bool hasCurrentScheduleItem =
+                (_scheduleController != null && _scheduleController.CurrentScheduleItem != null);
+
+            List<Action> actions = new List<Action>();
+
+            actions.Add(() =>
                 txtTimeRemaining.Content = 
-                    $"{value.Minutes:00}:{value.Seconds:00}";
+                    $"{value.Minutes:00}:{value.Seconds:00}"
+            );
+
+            actions.Add(() =>
+                txtCurrentScheduleItemLabel.Text =
+                    hasCurrentScheduleItem ?
+                        _scheduleController.CurrentScheduleItem.Label
+                        : String.Empty
+            );
             
-            Dispatcher.Invoke(Action);
-
-            if (_scheduleController != null && _scheduleController.CurrentScheduleItem != null)
-            {
-                void Action2() =>
-                    txtCurrentScheduleItemLabel.Text =
-                        _scheduleController.CurrentScheduleItem.Label;
-
-                Dispatcher.Invoke(Action2);
-            }
+            actions.ForEach((n) => Dispatcher.Invoke(n));
         }
         
         public void TimesUp(object timer, EventArgs e)
         {
-            if (_scheduleController.CurrentScheduleItem != null && 
-                _scheduleController.HasOpenScheduleItem())
+            if (_scheduleController.HasOpenScheduleItem())
             {
-                _scheduleController.CurrentScheduleItem.Completed = true;
-                _scheduleController.CurrentScheduleItem = _scheduleController.GetNextOpenScheduleItem();
-
-                // next item, if here is one.
-                if(_scheduleController.CurrentScheduleItem != null)
-                {
-                    _timer.Reset(_scheduleController.CurrentScheduleItem.TimeToSpend);
-
-                    void Action() =>
-                        txtCurrentScheduleItemLabel.Text =
-                            _scheduleController.CurrentScheduleItem.Label;
-
-                    Dispatcher.Invoke(Action);
-                }
+                _scheduleController.CompleteCurrentScheduleItem();
+                _scheduleController.InitializeNextOpenScheduleItem();
+            }
+            else
+            {
+                // All schedule Items finished.
+                _scheduleController.ClearCurrentScheduleItem();
             }
         }
 
