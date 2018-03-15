@@ -78,6 +78,28 @@ namespace PomodoroTimer.Controllers
             return result;
         }
 
+        public void InitializeNextOpenScheduleItem()
+        {
+            if (HasOpenScheduleItem())
+            {
+                CurrentScheduleItem = GetNextOpenScheduleItem();
+                Timer.Reset(CurrentScheduleItem.TimeToSpend);
+            }
+        }
+
+        public void ClearCurrentScheduleItem()
+        {
+            CurrentScheduleItem = null;
+        }
+
+        public void CompleteCurrentScheduleItem()
+        {
+            if (CurrentScheduleItem != null)
+            {
+                CurrentScheduleItem.Completed = true;
+            }
+        }
+
         #endregion
 
     }
