@@ -23,10 +23,7 @@ namespace PomodoroTimer.Models
 
         public String Label
         {
-            get
-            {
-                return _label;
-            }
+            get => _label;
             set
             {
                 _label = value;
@@ -36,10 +33,8 @@ namespace PomodoroTimer.Models
 
         public TimeSpan TimeToSpend
         {
-            get
-            {
-                return _timeToSpend;
-            }
+            get => _timeToSpend;
+            
             set
             {
                 _timeToSpend = value;
@@ -49,10 +44,7 @@ namespace PomodoroTimer.Models
 
         public bool Completed
         {
-            get
-            {
-                return _completed;
-            }
+            get => _completed;
             set
             {
                 _completed = value;
