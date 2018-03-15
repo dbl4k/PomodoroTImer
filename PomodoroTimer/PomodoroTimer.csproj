@@ -65,6 +65,7 @@
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\ScheduleItem.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SchedulePlanner.xaml.cs">
       <DependentUpon>SchedulePlanner.xaml</DependentUpon>
     </Compile>
