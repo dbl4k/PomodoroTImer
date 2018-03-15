@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using PomodoroTimer.Utility;
 
 namespace PomodoroTimer.Controllers
 {
@@ -15,7 +16,7 @@ namespace PomodoroTimer.Controllers
 
         private readonly OnTick _onTick;
     
-        private readonly TimeSpan _configuredStartValue = Properties.Settings.Default.Timer_StartValue;
+        private readonly TimeSpan _configuredStartValue = Configuration.DefaultTimeSpan;
 
         private readonly Timer _timer;
         private bool _paused = false;

@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PomodoroTimer.Annotations;
+using PomodoroTimer.Utility;
 
 namespace PomodoroTimer.Models
 {
     public class ScheduleItem : INotifyPropertyChanged
     {
-        private static readonly TimeSpan DefaultTimeToSpend = TimeSpan.FromMinutes(25);
+        private static readonly TimeSpan DefaultTimeToSpend = Configuration.DefaultTimeSpan;
 
         #region "properties"
 

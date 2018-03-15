@@ -6,6 +6,7 @@ using System.Windows.Input;
 using PomodoroTimer.Controllers;
 using PomodoroTimer.Models;
 using PomodoroTimer.Properties;
+using PomodoroTimer.Utility;
 using PomodoroTimer.ViewModels;
 using Application = System.Windows.Application;
 
@@ -79,15 +80,15 @@ namespace PomodoroTimer
         {
             if (ConfiguredWindowPositionIsValid())
             {
-                Top = Settings.Default.MainWindow_Top;
-                Left = Settings.Default.MainWindow_Left;
+                Top = Configuration.MainWindowTop;
+                Left = Configuration.MainWindowLeft;
             }
         }
 
         private bool ConfiguredWindowPositionIsValid()
         {
-            var top = Settings.Default.MainWindow_Top;
-            var left = Settings.Default.MainWindow_Left;
+            var top = Configuration.MainWindowTop;
+            var left = Configuration.MainWindowLeft;
             var width = Width;
             var height = Height;
             var right = left + width;
@@ -102,10 +103,10 @@ namespace PomodoroTimer
 
         private void SaveConfiguredWindowPosition()
         {
-            Settings.Default.MainWindow_Top = Top;
-            Settings.Default.MainWindow_Left = Left;
+            Configuration.MainWindowTop = Top;
+            Configuration.MainWindowLeft = Left;
 
-            Settings.Default.Save();
+            Configuration.Save();
         }
 
         #endregion

@@ -69,6 +69,7 @@
     <Compile Include="SchedulePlanner.xaml.cs">
       <DependentUpon>SchedulePlanner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Configuration.cs" />
     <Compile Include="ViewModels\ScheduleItems.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
