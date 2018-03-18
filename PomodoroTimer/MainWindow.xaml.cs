@@ -117,7 +117,11 @@ namespace PomodoroTimer
 
         private void btnRefresh_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            _timer.Reset();
+            if (HasCurrentScheduleItem())
+                _timer.Reset(GetCurrentScheduleItem().TimeToSpend);
+            else
+                _timer.Reset();
+            
             UpdateTimeRemainingLabel(_timer.TimeRemaining);
         }
 
@@ -150,6 +154,20 @@ namespace PomodoroTimer
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             SaveConfiguredWindowPosition();
+        }
+
+        #endregion
+
+        #region "methods"
+
+        private bool HasCurrentScheduleItem()
+        {
+            return GetCurrentScheduleItem() != null;
+        }
+
+        private ScheduleItem GetCurrentScheduleItem()
+        {
+            return _scheduleController?.CurrentScheduleItem;
         }
 
         #endregion
