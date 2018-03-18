@@ -56,6 +56,13 @@
                         <TextBlock Text=" Completed: " Foreground="WhiteSmoke" />
                         <CheckBox IsChecked="{Binding Path=Completed}">
                         </CheckBox>
+
+                        <Image x:Name="btnRemoveItem" 
+                               Source="pack://application:,,,/Resources/images/ico_remove.png" 
+                               Width="10" 
+                               Height="10" 
+                               Margin="4,0,0,0"
+                               ToolTip="Remove Item"/>
                     </StackPanel>
                 </DataTemplate>
 
