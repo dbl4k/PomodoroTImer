@@ -64,10 +64,18 @@ namespace PomodoroTimer
             var map = GetAddItemButtonValueMap();
 
             if (map.TryGetValue(sender.Name, out TimeSpan value))
-                addNewScheduleItemToEnd(value);
+                AddNewScheduleItemToEnd(value);
             else
                 throw new InvalidEnumArgumentException($"no button/value map item exists for mapping ${sender}");
             
+        }
+        
+        #endregion
+
+        #region "methods"
+        private void AddNewScheduleItemToEnd(TimeSpan timeSpan)
+        {
+            throw new NotImplementedException();
         }
 
         private Dictionary<String, TimeSpan> GetAddItemButtonValueMap()
@@ -84,18 +92,10 @@ namespace PomodoroTimer
 
         #endregion
 
-        #region "methods"
-        private void addNewScheduleItemToEnd(TimeSpan timeSpan)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
 
 
 
-       
 
-  
+
     }
 }
