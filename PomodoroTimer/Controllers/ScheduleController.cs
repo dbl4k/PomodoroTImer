@@ -15,7 +15,10 @@ namespace PomodoroTimer.Controllers
 
         #region "fields"
 
-        public Schedule Schedule;
+        private int _nextNewItemId = 0;
+
+        public Schedule Schedule; // non-observable
+        public ScheduleItems ScheduleItems; // observable view collection
         public ManagedTimer Timer;
         
         #endregion
@@ -41,7 +44,7 @@ namespace PomodoroTimer.Controllers
 
             for(var i=1; i <= items; i++)
             {
-                var name = GetDefaultItemName(i);
+                var name = GetDefaultItemName(GetNextNewItemId());
                 Schedule.Items.Add(new ScheduleItem(name));
             }
         }
@@ -50,14 +53,19 @@ namespace PomodoroTimer.Controllers
 
         #region "methods"
 
-        private string GetDefaultItemName(int i)
+        public int GetNextNewItemId()
         {
-            return String.Format(_fDefaultItemName, i);
+            return _nextNewItemId += 1;
+        }
+
+        private string GetDefaultItemName(int itemId)
+        {
+            return String.Format(_fDefaultItemName, itemId);
         }
 
         public ScheduleItems GetObservableCollection()
         {
-            return new ScheduleItems(this);
+            return ScheduleItems ?? (ScheduleItems = new ScheduleItems(this));
         }
 
         public bool HasOpenScheduleItem() => GetNextOpenScheduleItem() != null;
@@ -100,6 +108,14 @@ namespace PomodoroTimer.Controllers
             }
         }
 
+        internal void AddNewScheduleItem(string label, TimeSpan timeToSpend)
+        {
+            if (String.IsNullOrEmpty(label))
+                label = GetDefaultItemName(GetNextNewItemId());
+
+            ScheduleItems.Add(new ScheduleItem(label, timeToSpend));
+        }
+        
         #endregion
 
     }
