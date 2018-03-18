@@ -46,11 +46,12 @@ namespace PomodoroTimer
             var timeLabelText = $"{value.Minutes:00}:{value.Seconds:00}";
             var scheduleItemText = HasCurrentScheduleItem() ? GetCurrentScheduleItem().Label : String.Empty;
 
-            List<Action> actions = new List<Action>();
+            List<Action> actions = new List<Action>
+            {
+                () => txtTimeRemaining.Content = timeLabelText,
+                () => txtCurrentScheduleItemLabel.Text = scheduleItemText
+            };
 
-            actions.Add(() => txtTimeRemaining.Content = timeLabelText);
-            actions.Add(() => txtCurrentScheduleItemLabel.Text = scheduleItemText);
-            
             actions.ForEach((n) => Dispatcher.Invoke(n));
         }
         
