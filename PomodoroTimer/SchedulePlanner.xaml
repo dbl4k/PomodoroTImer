@@ -1,0 +1,140 @@
+﻿<Window x:Class="PomodoroTimer.SchedulePlanner"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PomodoroTimer"
+        xmlns:vm="clr-namespace:PomodoroTimer.ViewModels"
+        xmlns:m="clr-namespace:PomodoroTimer.Models"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="SchedulePlanner" Height="300" Width="396.639"
+        Topmost="True" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown">
+    <Window.Background>
+        <SolidColorBrush Opacity="0" Color="White"/>
+    </Window.Background>
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="ScheduleItemsDataSource" ObjectType="{x:Type vm:ScheduleItems}">
+            <ObjectDataProvider.ConstructorParameters>
+                <system:Int32>5</system:Int32>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <vm:ScheduleItems x:Key="ScheduleItemsData"/>
+    </Window.Resources>
+
+
+
+    <Grid>
+        <Rectangle x:Name="rectBackground" 
+                   Fill="#FF0000" 
+                   Stroke="Black" 
+                   Margin="0,0,0,0" 
+                   HorizontalAlignment="Stretch" 
+                   VerticalAlignment="Stretch"  
+                   RadiusY="15" 
+                   RadiusX="15"/>
+        <ListBox x:Name="lstScheduleItems"
+                 BorderThickness="0"
+                 Background="#FF0000"
+                 Margin="10,45,10.5,36" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch"
+                 ItemsSource="{Binding Source={StaticResource ScheduleItemsDataSource}}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <!-- ScheduleItem.Label (String) -->
+                        <TextBlock Text="Activity: " Foreground="WhiteSmoke" />
+                        <TextBox Text="{Binding Path=Label}" Width="130" />
+
+                        <!-- ScheduleItem.TimeToSpend (TimeSpan) -->
+                        <TextBlock Text=" Time: " Foreground="WhiteSmoke" />
+                        <TextBox Text="{Binding Path=TimeToSpend}" Width="50"/>
+
+                        <!-- ScheduleItem.Completed (bool) -->
+                        <TextBlock Text=" Completed: " Foreground="WhiteSmoke" />
+                        <CheckBox IsChecked="{Binding Path=Completed}">
+                        </CheckBox>
+
+                        <Image x:Name="btnRemoveItem" 
+                               Source="pack://application:,,,/Resources/images/ico_remove.png" 
+                               Width="10" 
+                               Height="10" 
+                               Margin="4,0,0,0"
+                               ToolTip="Remove Item"
+                               MouseDown="btnRemoveItem_MouseDown"/>
+                    </StackPanel>
+                </DataTemplate>
+
+
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+        <Button x:Name="btnClose"
+            Content="Close" 
+            Background="Red" 
+            Foreground="AliceBlue" 
+            HorizontalAlignment="Right" 
+            Margin="0,270,14.5,0" 
+            VerticalAlignment="Top" 
+            Width="68"
+            Click="btnClose_Click"/>
+        <Button x:Name="btnStartSchedule"
+            Content="Start Schedule" 
+            Background="Red" 
+            Foreground="AliceBlue" 
+            HorizontalAlignment="Right" 
+            Margin="0,270,87.5,0" 
+            VerticalAlignment="Top" 
+            Width="100"
+            Click="btnStartSchedule_Click"/>
+        
+        
+        <StackPanel x:Name="pnlAddButtons" Orientation="Horizontal" Margin="20,0,20,260" HorizontalAlignment="Right">
+            <Button x:Name="btnAddItem15mins"
+                Background="Red" 
+                Foreground="AliceBlue" 
+                HorizontalAlignment="Right" 
+                Margin="0,15,05,0"
+                VerticalAlignment="Top" 
+                Width="83"
+                Click="btnAddScheduleItem_Click" Height="20">
+                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                    <Image Source="pack://application:,,,/Resources/images/ico_clock.png" Height="10" Margin="0,0,3,0"></Image>
+                    <TextBlock>15 mins...</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnAddItem20mins"
+                    Background="Red" 
+                    Foreground="AliceBlue" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,15,05,0" 
+                    VerticalAlignment="Top" 
+                    Width="83"
+                    Click="btnAddScheduleItem_Click" Height="20">
+                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                    <Image Source="pack://application:,,,/Resources/images/ico_clock.png" Height="10" Margin="0,0,3,0"></Image>
+                    <TextBlock>20 mins...</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnAddItem25mins"
+                    Background="Red" 
+                    Foreground="AliceBlue" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,15,05,0"  
+                    VerticalAlignment="Top" 
+                    Width="83"
+                    Click="btnAddScheduleItem_Click" Height="20">
+                <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                    <Image Source="pack://application:,,,/Resources/images/ico_clock.png" Height="10" Margin="0,0,3,0"></Image>
+                    <TextBlock>25 mins...</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

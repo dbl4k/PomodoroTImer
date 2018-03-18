@@ -4,40 +4,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PomodoroTimer.ViewModels;
 
 namespace PomodoroTimer.Controllers
 {
-    class ScheduleController
+    public class ScheduleController
     {
 
-        private static String F_DEFAULT_ITEM_NAME = "Item {0}";
+        private static String _fDefaultItemName = "Item {0}";
 
         #region "fields"
 
-        public Schedule Schedule;
+        private int _nextNewItemId = 0;
+
+        public Schedule Schedule; // non-observable
+        public ScheduleItems ScheduleItems; // observable view collection
+        public ManagedTimer Timer;
         
         #endregion
 
         #region "properties"
 
-        // none yet..
+        public ScheduleItem CurrentScheduleItem { get; set; }
 
         #endregion
 
         #region "constructor(s)"
 
-        public ScheduleController() : this(1) 
+        public ScheduleController(ManagedTimer timer) : this(timer, 1) 
         {
         }
 
-        public ScheduleController(int items)
+        public ScheduleController(ManagedTimer timer, int items)
         {
+            Timer = timer;
+
             Schedule = new Schedule();
             Schedule.Items = new List<ScheduleItem>();
 
             for(var i=1; i <= items; i++)
             {
-                var name = GetDefaultItemName(i);
+                var name = GetDefaultItemName(GetNextNewItemId());
                 Schedule.Items.Add(new ScheduleItem(name));
             }
         }
@@ -46,11 +53,80 @@ namespace PomodoroTimer.Controllers
 
         #region "methods"
 
-        private string GetDefaultItemName(int i)
+        public int GetNextNewItemId()
         {
-            return String.Format(F_DEFAULT_ITEM_NAME, i);
+            if (ScheduleItems != null)
+                _nextNewItemId = ScheduleItems.Count;
+
+            return _nextNewItemId += 1;
         }
 
+        private string GetDefaultItemName(int itemId)
+        {
+            return String.Format(_fDefaultItemName, itemId);
+        }
+
+        public ScheduleItems GetObservableCollection()
+        {
+            return ScheduleItems ?? (ScheduleItems = new ScheduleItems(this));
+        }
+
+        public bool HasOpenScheduleItem() => GetNextOpenScheduleItem() != null;
+
+        public ScheduleItem GetNextOpenScheduleItem()
+        {
+            ScheduleItem result = null;
+
+            foreach (ScheduleItem item in Schedule.Items)
+            {
+                if (item.Completed.Equals(false))
+                {
+                    result = item;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        public void InitializeNextOpenScheduleItem()
+        {
+            if (HasOpenScheduleItem())
+            {
+                CurrentScheduleItem = GetNextOpenScheduleItem();
+                Timer.Reset(CurrentScheduleItem.TimeToSpend);
+            }
+        }
+
+        public void ClearCurrentScheduleItem()
+        {
+            CurrentScheduleItem = null;
+        }
+
+        internal void RemoveScheduleItem(ScheduleItem scheduleItem)
+        {
+            if (ScheduleItems.Contains(scheduleItem))
+            {
+                ScheduleItems.Remove(scheduleItem);
+            }
+        }
+
+        public void CompleteCurrentScheduleItem()
+        {
+            if (CurrentScheduleItem != null)
+            {
+                CurrentScheduleItem.Completed = true;
+            }
+        }
+
+        internal void AddNewScheduleItem(string label, TimeSpan timeToSpend)
+        {
+            if (String.IsNullOrEmpty(label))
+                label = GetDefaultItemName(GetNextNewItemId());
+
+            ScheduleItems.Add(new ScheduleItem(label, timeToSpend));
+        }
+        
         #endregion
 
     }

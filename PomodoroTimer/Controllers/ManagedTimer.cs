@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using PomodoroTimer.Utility;
 
 namespace PomodoroTimer.Controllers
 {
     public class ManagedTimer
     {
+        public event EventHandler TimesUp;
+        private bool _timesUpEventFired = false;
+
         public delegate void OnTick(TimeSpan value);
 
         private readonly OnTick _onTick;
     
-        private readonly TimeSpan _configuredStartValue = Properties.Settings.Default.Timer_StartValue;
+        private readonly TimeSpan _configuredStartValue = Configuration.DefaultTimeSpan;
 
         private readonly Timer _timer;
-        private bool _paused = true;
+        private bool _paused = false;
         private TimeSpan _timeRemaining;
 
         #region "constructor"
@@ -44,8 +48,19 @@ namespace PomodoroTimer.Controllers
             if (IsRunning)
             {
                 Decrement();
-                _onTick(TimeRemaining);
             }
+           
+            if (!IsPaused && IsZero)
+            {
+                if (!_timesUpEventFired)
+                {
+                    _timesUpEventFired = true;
+                    TimesUp?.Invoke(this, e);
+                }
+                
+            }
+
+            _onTick(TimeRemaining);
         }
 
         #endregion
@@ -120,8 +135,14 @@ namespace PomodoroTimer.Controllers
 
         public void Reset()
         {
+            Reset(_configuredStartValue);
+        }
+
+        public void Reset(TimeSpan value)
+        {
             _timer.Stop();
-            TimeRemaining = _configuredStartValue;
+            TimeRemaining = value;
+            _timesUpEventFired = false;
             _timer.Start();
         }
 
