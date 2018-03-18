@@ -62,7 +62,8 @@
                                Width="10" 
                                Height="10" 
                                Margin="4,0,0,0"
-                               ToolTip="Remove Item"/>
+                               ToolTip="Remove Item"
+                               MouseDown="btnRemoveItem_MouseDown"/>
                     </StackPanel>
                 </DataTemplate>
 

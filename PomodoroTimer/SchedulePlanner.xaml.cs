@@ -72,7 +72,12 @@ namespace PomodoroTimer
                 throw new InvalidEnumArgumentException($"no button/value map item exists for mapping ${sender}");
             
         }
-        
+
+        private void btnRemoveItem_MouseDown(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region "methods"
