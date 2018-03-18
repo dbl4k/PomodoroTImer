@@ -130,5 +130,10 @@
   <ItemGroup>
     <Resource Include="ico_app.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\ico_add.png" />
+    <Resource Include="Resources\images\ico_clock.png" />
+    <Resource Include="Resources\images\ico_remove.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
