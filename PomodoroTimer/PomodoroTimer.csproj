@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Utility\AudioPlayer.cs" />
     <Compile Include="Utility\Configuration.cs" />
+    <Compile Include="Utility\Desktop.cs" />
     <Compile Include="Utility\Resources.cs" />
     <Compile Include="ViewModels\ScheduleItems.cs" />
     <Page Include="MainWindow.xaml">

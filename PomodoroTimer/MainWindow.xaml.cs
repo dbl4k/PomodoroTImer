@@ -85,10 +85,9 @@ namespace PomodoroTimer
             var height = Height;
             var right = left + width;
             var bottom = top + height;
-
-            var bounds = Screen.PrimaryScreen.Bounds;
-            var screenWidth = bounds.Width;
-            var screenHeight = bounds.Height;
+            
+            var screenWidth = Desktop.GetPrimaryWidth();
+            var screenHeight = Desktop.GetPrimaryHeight();
 
             return right < screenWidth && bottom < screenHeight;
         }
