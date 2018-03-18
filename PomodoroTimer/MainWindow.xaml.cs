@@ -18,7 +18,7 @@ namespace PomodoroTimer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ManagedTimer _timer;
+        private ManagedTimer _timer;
         private ScheduleController _scheduleController;
         private SchedulePlanner _planner;
 
@@ -28,13 +28,18 @@ namespace PomodoroTimer
 
             RestoreConfiguredWindowPosition();
 
+            SetupTimer();
+        }
+
+        public void SetupTimer()
+        {
             _timer = new ManagedTimer(
                 UpdateTimeRemainingLabel
             );
 
             _timer.TimesUp += TimesUp;
         }
-        
+
         public void UpdateTimeRemainingLabel(TimeSpan value)
         {
             var timeLabelText = $"{value.Minutes:00}:{value.Seconds:00}";
