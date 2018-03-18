@@ -59,11 +59,14 @@ namespace PomodoroTimer
             _controller.InitializeNextOpenScheduleItem();
         }
 
-        private void btnAddScheduleItem_Click(Button sender, RoutedEventArgs e)
+        private void btnAddScheduleItem_Click(object sender, RoutedEventArgs e)
         {
+            if (!(sender is Button))
+                throw new InvalidEnumArgumentException($"Handler expects sender type of '${typeof(Button)}', but received '${sender.GetType()}'");    
+
             var map = GetAddItemButtonValueMap();
 
-            if (map.TryGetValue(sender.Name, out TimeSpan value))
+            if (map.TryGetValue(((Button)sender).Name, out TimeSpan value))
                 AddNewScheduleItemToEnd(value);
             else
                 throw new InvalidEnumArgumentException($"no button/value map item exists for mapping ${sender}");
@@ -91,11 +94,6 @@ namespace PomodoroTimer
         }
 
         #endregion
-
-
-
-
-
-
+        
     }
 }
