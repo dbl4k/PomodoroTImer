@@ -69,7 +69,9 @@
     <Compile Include="SchedulePlanner.xaml.cs">
       <DependentUpon>SchedulePlanner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\AudioPlayer.cs" />
     <Compile Include="Utility\Configuration.cs" />
+    <Compile Include="Utility\Resources.cs" />
     <Compile Include="ViewModels\ScheduleItems.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -134,6 +136,11 @@
     <Resource Include="Resources\images\ico_add.png" />
     <Resource Include="Resources\images\ico_clock.png" />
     <Resource Include="Resources\images\ico_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\audio\timer-beep.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -55,6 +55,8 @@ namespace PomodoroTimer
         {
             _scheduleController.CompleteCurrentScheduleItem();
 
+            Audio.PlayOnce(Utility.Resources.Audio.TimerBeep);
+
             if (_scheduleController.HasOpenScheduleItem())
                 _scheduleController.InitializeNextOpenScheduleItem();
             else

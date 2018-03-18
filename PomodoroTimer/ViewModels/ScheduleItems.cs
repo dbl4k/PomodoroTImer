@@ -14,7 +14,12 @@ namespace PomodoroTimer.ViewModels
     {
         public ScheduleController _controller;
         public Schedule _schedule;
-        
+
+        public ScheduleItems() : base()
+        {
+            // only used by designer, not 
+        }
+
         public ScheduleItems(ScheduleController controller) : base()
         {
             _controller = controller;
