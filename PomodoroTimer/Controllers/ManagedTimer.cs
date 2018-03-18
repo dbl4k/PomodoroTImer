@@ -9,8 +9,8 @@ namespace PomodoroTimer.Controllers
 {
     public class ManagedTimer
     {
-        public event EventHandler TimesUp;
-        private bool _timesUpEventFired = false;
+        public event EventHandler OnTimerReachedZero;
+        private bool _timerReachedZeroEventFired = false;
 
         public delegate void OnTick(TimeSpan value);
 
@@ -52,10 +52,10 @@ namespace PomodoroTimer.Controllers
            
             if (!IsPaused && IsZero)
             {
-                if (!_timesUpEventFired)
+                if (!_timerReachedZeroEventFired)
                 {
-                    _timesUpEventFired = true;
-                    TimesUp?.Invoke(this, e);
+                    _timerReachedZeroEventFired = true;
+                    OnTimerReachedZero?.Invoke(this, e);
                 }
                 
             }
@@ -142,7 +142,7 @@ namespace PomodoroTimer.Controllers
         {
             _timer.Stop();
             TimeRemaining = value;
-            _timesUpEventFired = false;
+            _timerReachedZeroEventFired = false;
             _timer.Start();
         }
 

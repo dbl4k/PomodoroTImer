@@ -37,7 +37,7 @@ namespace PomodoroTimer
                 UpdateTimeRemainingLabel
             );
 
-            _timer.TimesUp += TimesUp;
+            _timer.OnTimerReachedZero += OnTimerReachedZero;
         }
 
         public void UpdateTimeRemainingLabel(TimeSpan value)
@@ -53,7 +53,7 @@ namespace PomodoroTimer
             actions.ForEach((n) => Dispatcher.Invoke(n));
         }
         
-        public void TimesUp(object timer, EventArgs e)
+        public void OnTimerReachedZero(object timer, EventArgs e)
         {
             _scheduleController.CompleteCurrentScheduleItem();
 
