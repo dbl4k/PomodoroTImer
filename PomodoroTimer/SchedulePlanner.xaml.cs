@@ -1,6 +1,8 @@
 ﻿using PomodoroTimer.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,11 +59,43 @@ namespace PomodoroTimer
             _controller.InitializeNextOpenScheduleItem();
         }
 
+        private void btnAddScheduleItem_Click(Button sender, RoutedEventArgs e)
+        {
+            var map = GetAddItemButtonValueMap();
+
+            if (map.TryGetValue(sender.Name, out TimeSpan value))
+                addNewScheduleItemToEnd(value);
+            else
+                throw new InvalidEnumArgumentException($"no button/value map item exists for mapping ${sender}");
+            
+        }
+
+        private Dictionary<String, TimeSpan> GetAddItemButtonValueMap()
+        {
+            var map = new Dictionary<String, TimeSpan>
+            {
+                { btnAddItem15mins.Name, TimeSpan.FromMinutes(15) },
+                { btnAddItem20mins.Name, TimeSpan.FromMinutes(20) },
+                { btnAddItem25mins.Name, TimeSpan.FromMinutes(25) }
+            };
+
+            return map;
+        }
+
         #endregion
 
         #region "methods"
-        
+        private void addNewScheduleItemToEnd(TimeSpan timeSpan)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
+
+
+       
+
+  
     }
 }
