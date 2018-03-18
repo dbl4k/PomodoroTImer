@@ -37,11 +37,8 @@ namespace PomodoroTimer
         
         public void UpdateTimeRemainingLabel(TimeSpan value)
         {
-            bool hasCurrentScheduleItem =
-                (_scheduleController != null && _scheduleController.CurrentScheduleItem != null);
-
             var timeLabelText = $"{value.Minutes:00}:{value.Seconds:00}";
-            var scheduleItemText = hasCurrentScheduleItem ? _scheduleController.CurrentScheduleItem.Label : String.Empty;
+            var scheduleItemText = HasCurrentScheduleItem() ? GetCurrentScheduleItem().Label : String.Empty;
 
             List<Action> actions = new List<Action>();
 
