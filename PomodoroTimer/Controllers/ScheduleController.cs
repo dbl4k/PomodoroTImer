@@ -55,6 +55,9 @@ namespace PomodoroTimer.Controllers
 
         public int GetNextNewItemId()
         {
+            if (ScheduleItems != null)
+                _nextNewItemId = ScheduleItems.Count;
+
             return _nextNewItemId += 1;
         }
 
