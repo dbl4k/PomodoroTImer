@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using PomodoroTimer.Controllers;
+using PomodoroTimer.Enumerations;
 using PomodoroTimer.Models;
 using PomodoroTimer.Properties;
 using PomodoroTimer.Utility;
@@ -70,28 +71,13 @@ namespace PomodoroTimer
 
         private void RestoreConfiguredWindowPosition()
         {
-            if (ConfiguredWindowPositionIsValid())
+            if (Desktop.IsWindowWithinPrimaryBounds(this) == BoundaryTestResult.Inside)
             {
                 Top = Configuration.MainWindowTop;
                 Left = Configuration.MainWindowLeft;
             }
         }
-
-        private bool ConfiguredWindowPositionIsValid()
-        {
-            var top = Configuration.MainWindowTop;
-            var left = Configuration.MainWindowLeft;
-            var width = Width;
-            var height = Height;
-            var right = left + width;
-            var bottom = top + height;
-            
-            var screenWidth = Desktop.GetPrimaryWidth();
-            var screenHeight = Desktop.GetPrimaryHeight();
-
-            return right < screenWidth && bottom < screenHeight;
-        }
-
+        
         private void SaveConfiguredWindowPosition()
         {
             Configuration.MainWindowTop = Top;
