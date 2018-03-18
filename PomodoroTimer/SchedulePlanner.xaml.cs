@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PomodoroTimer.Controllers;
+using PomodoroTimer.Models;
 
 namespace PomodoroTimer
 {
@@ -75,7 +76,11 @@ namespace PomodoroTimer
 
         private void btnRemoveItem_MouseDown(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var image = (Image) sender;
+            var parent = (StackPanel) image.Parent;
+            var context = (ScheduleItem)parent.DataContext;
+
+            _controller.RemoveScheduleItem(context);
         }
 
         #endregion

@@ -100,6 +100,14 @@ namespace PomodoroTimer.Controllers
             CurrentScheduleItem = null;
         }
 
+        internal void RemoveScheduleItem(ScheduleItem scheduleItem)
+        {
+            if (ScheduleItems.Contains(scheduleItem))
+            {
+                ScheduleItems.Remove(scheduleItem);
+            }
+        }
+
         public void CompleteCurrentScheduleItem()
         {
             if (CurrentScheduleItem != null)
